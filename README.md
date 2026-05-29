@@ -1,4 +1,4 @@
-# BASIC-TWITTER (Q2)
+# Basic Twitter(P2)
 
 A Twitter / Amazon-review–style **post composer** built with **Core Java 17** and **JavaFX 21**.  
 No Spring Boot, no web server — a standalone desktop GUI application.
