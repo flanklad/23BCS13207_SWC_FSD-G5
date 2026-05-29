@@ -1,4 +1,4 @@
-# Basic Twitter (P2) — 23BCS13207 SWC FSD Group 5
+# 23BCS13207 SWC FSD Group 5 Projects
 
 This repository contains Core Java desktop application assignments.
 
