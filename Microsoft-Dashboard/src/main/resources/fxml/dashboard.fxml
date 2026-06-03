@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="day2fsswc.microsoftdashboard.controller.DashboardController"
+            styleClass="root-pane"
+            stylesheets="@../css/dashboard.css">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TOP  —  App-bar + Tab-bar
+         ═══════════════════════════════════════════════════════════════ -->
+    <top>
+        <VBox>
+
+            <!-- App Bar -->
+            <HBox styleClass="app-bar" alignment="CENTER_LEFT" spacing="12">
+                <padding><Insets top="14" right="24" bottom="14" left="24"/></padding>
+                <Label text="⊞" styleClass="app-logo"/>
+                <Label text="Microsoft Dashboard" styleClass="app-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Sidak Sharma" styleClass="user-name"/>
+                <Label text="S" styleClass="user-avatar"/>
+            </HBox>
+
+            <!-- Tab Bar -->
+            <HBox styleClass="tab-bar" alignment="CENTER_LEFT">
+                <padding><Insets left="20"/></padding>
+                <Button fx:id="overviewTab" text="Overview"
+                        styleClass="tab-btn,tab-active"
+                        onAction="#switchToOverview"/>
+                <Button fx:id="detailsTab"  text="Details"
+                        styleClass="tab-btn"
+                        onAction="#switchToDetails"/>
+                <Button fx:id="settingsTab" text="Settings"
+                        styleClass="tab-btn"
+                        onAction="#switchToSettings"/>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CENTER  —  Scrollable content area with three stacked panels
+         ═══════════════════════════════════════════════════════════════ -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="content-scroll"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <StackPane>
+
+                <!-- ────────────────────────────────────────────────
+                     OVERVIEW PANEL
+                ──────────────────────────────────────────────────── -->
+                <VBox fx:id="overviewContent" styleClass="content-pane" spacing="24">
+                    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                    <Label text="Overview" styleClass="section-title"/>
+
+                    <!-- Stat Cards Row -->
+                    <HBox spacing="16">
+
+                        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label text="👥" styleClass="card-icon"/>
+                                <Label text="TOTAL USERS" styleClass="card-label"/>
+                            </HBox>
+                            <Label fx:id="totalUsersValue" text="—" styleClass="card-value"/>
+                            <Label text="▲ 8.2% from last month" styleClass="card-trend positive"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label text="✅" styleClass="card-icon"/>
+                                <Label text="ACTIVE TASKS" styleClass="card-label"/>
+                            </HBox>
+                            <Label fx:id="activeTasksValue" text="—" styleClass="card-value"/>
+                            <Label text="▲ 12 new today" styleClass="card-trend positive"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label text="💰" styleClass="card-icon"/>
+                                <Label text="REVENUE" styleClass="card-label"/>
+                            </HBox>
+                            <Label fx:id="revenueValue" text="—" styleClass="card-value"/>
+                            <Label text="▲ 5.1% from last month" styleClass="card-trend positive"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label text="📊" styleClass="card-icon"/>
+                                <Label text="PERFORMANCE" styleClass="card-label"/>
+                            </HBox>
+                            <Label fx:id="performanceValue" text="—" styleClass="card-value-blue"/>
+                            <Label text="▼ 0.3% from last month" styleClass="card-trend neutral"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <!-- Lower Row: Activity + Status -->
+                    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+                        <!-- Recent Activity -->
+                        <VBox styleClass="content-card" spacing="14" HBox.hgrow="ALWAYS">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <Label text="Recent Activity" styleClass="card-header"/>
+                            <Separator styleClass="divider"/>
+                            <ListView fx:id="activityList" styleClass="activity-list" prefHeight="300"/>
+                        </VBox>
+
+                        <!-- System Status -->
+                        <VBox styleClass="content-card" prefWidth="310" spacing="14">
+                            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+                            <Label text="System Status" styleClass="card-header"/>
+                            <Separator styleClass="divider"/>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="●" styleClass="dot-green"/>
+                                <Label text="API Services" styleClass="status-item-label"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Operational" styleClass="badge-green"/>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="●" styleClass="dot-green"/>
+                                <Label text="Database" styleClass="status-item-label"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Operational" styleClass="badge-green"/>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="●" styleClass="dot-yellow"/>
+                                <Label text="CDN" styleClass="status-item-label"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Degraded" styleClass="badge-yellow"/>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="●" styleClass="dot-green"/>
+                                <Label text="Auth Service" styleClass="status-item-label"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Operational" styleClass="badge-green"/>
+                            </HBox>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="●" styleClass="dot-green"/>
+                                <Label text="Storage" styleClass="status-item-label"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Operational" styleClass="badge-green"/>
+                            </HBox>
+
+                            <Separator styleClass="divider"/>
+                            <Label text="Last updated: Just now" styleClass="update-time"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- ────────────────────────────────────────────────
+                     DETAILS PANEL  (hidden initially)
+                ──────────────────────────────────────────────────── -->
+                <VBox fx:id="detailsContent" styleClass="content-pane"
+                      spacing="24" visible="false" managed="false">
+                    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                    <Label text="Details" styleClass="section-title"/>
+
+                    <!-- Toolbar -->
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <TextField promptText="🔍  Search employees…"
+                                   styleClass="search-field" prefWidth="320"/>
+                        <Button text="Search" styleClass="btn-primary"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="10 records" styleClass="record-count"/>
+                    </HBox>
+
+                    <!-- Table Card -->
+                    <VBox styleClass="content-card">
+                        <TableView fx:id="detailsTable" styleClass="data-table" prefHeight="480">
+                            <columns>
+                                <TableColumn fx:id="nameCol"   text="Name"       prefWidth="200"/>
+                                <TableColumn fx:id="deptCol"   text="Department" prefWidth="160"/>
+                                <TableColumn fx:id="statusCol" text="Status"     prefWidth="120"/>
+                                <TableColumn fx:id="dateCol"   text="Join Date"  prefWidth="140"/>
+                                <TableColumn fx:id="valueCol"  text="Value"      prefWidth="120"/>
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                            </columnResizePolicy>
+                        </TableView>
+                    </VBox>
+
+                </VBox>
+
+                <!-- ────────────────────────────────────────────────
+                     SETTINGS PANEL  (hidden initially)
+                ──────────────────────────────────────────────────── -->
+                <VBox fx:id="settingsContent" styleClass="content-pane"
+                      spacing="24" visible="false" managed="false">
+                    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                    <Label text="Settings" styleClass="section-title"/>
+
+                    <HBox spacing="24" alignment="TOP_LEFT">
+
+                        <!-- Left column -->
+                        <VBox spacing="20" HBox.hgrow="ALWAYS">
+
+                            <!-- Appearance -->
+                            <VBox styleClass="content-card" spacing="16">
+                                <padding><Insets top="22" right="24" bottom="22" left="24"/></padding>
+                                <Label text="Appearance" styleClass="card-header"/>
+                                <Separator styleClass="divider"/>
+
+                                <HBox alignment="CENTER_LEFT" spacing="16">
+                                    <Label text="Theme" styleClass="settings-label" prefWidth="160"/>
+                                    <ChoiceBox fx:id="themeChoice" styleClass="settings-choice" prefWidth="220"/>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="16">
+                                    <Label text="Language" styleClass="settings-label" prefWidth="160"/>
+                                    <ChoiceBox fx:id="languageChoice" styleClass="settings-choice" prefWidth="220"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Notifications -->
+                            <VBox styleClass="content-card" spacing="16">
+                                <padding><Insets top="22" right="24" bottom="22" left="24"/></padding>
+                                <Label text="Notifications" styleClass="card-header"/>
+                                <Separator styleClass="divider"/>
+
+                                <HBox alignment="CENTER_LEFT" spacing="16">
+                                    <Label text="Email Notifications" styleClass="settings-label" prefWidth="240"/>
+                                    <CheckBox fx:id="emailNotifCheck" styleClass="ms-check"/>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="16">
+                                    <Label text="Desktop Notifications" styleClass="settings-label" prefWidth="240"/>
+                                    <CheckBox fx:id="desktopNotifCheck" styleClass="ms-check"/>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="16">
+                                    <Label text="Weekly Reports" styleClass="settings-label" prefWidth="240"/>
+                                    <CheckBox fx:id="weeklyReportCheck" styleClass="ms-check"/>
+                                </HBox>
+                            </VBox>
+
+                        </VBox>
+
+                        <!-- Right column — Account -->
+                        <VBox styleClass="content-card" prefWidth="380" spacing="16">
+                            <padding><Insets top="22" right="24" bottom="22" left="24"/></padding>
+                            <Label text="Account" styleClass="card-header"/>
+                            <Separator styleClass="divider"/>
+
+                            <!-- Avatar + info -->
+                            <HBox alignment="CENTER_LEFT" spacing="16">
+                                <padding><Insets top="4" bottom="4"/></padding>
+                                <Label text="S" styleClass="settings-avatar"/>
+                                <VBox spacing="4">
+                                    <Label text="Sidak Sharma" styleClass="account-name"/>
+                                    <Label text="kavishasharma078@gmail.com" styleClass="account-email"/>
+                                    <Label text="Administrator" styleClass="account-role"/>
+                                </VBox>
+                            </HBox>
+
+                            <Separator styleClass="divider"/>
+
+                            <VBox spacing="6">
+                                <Label text="Display Name" styleClass="field-label"/>
+                                <TextField fx:id="displayNameField" styleClass="settings-field"
+                                           promptText="Your display name"/>
+                            </VBox>
+
+                            <VBox spacing="6">
+                                <Label text="Email Address" styleClass="field-label"/>
+                                <TextField text="kavishasharma078@gmail.com"
+                                           styleClass="settings-field,readonly-field"
+                                           editable="false"/>
+                            </VBox>
+
+                            <HBox spacing="12" alignment="CENTER_LEFT">
+                                <padding><Insets top="4"/></padding>
+                                <Button text="Save Changes" styleClass="btn-primary"
+                                        onAction="#saveSettings"/>
+                                <Button text="Cancel" styleClass="btn-secondary"/>
+                            </HBox>
+
+                            <Label fx:id="settingsSavedLabel"
+                                   text="✓  Settings saved successfully!"
+                                   styleClass="saved-label"
+                                   visible="false"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+            </StackPane>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
