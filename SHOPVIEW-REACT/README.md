@@ -6,7 +6,7 @@ Demonstrates the core data-fetching lifecycle: loading skeletons → live produc
 
 ## Screenshot
 
-![ShopView UI](./screenshots/ui-preview.png)
+
 
 ## Features
 
