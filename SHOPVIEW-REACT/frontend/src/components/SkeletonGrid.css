@@ -1,0 +1,66 @@
+/* ── Shimmer keyframe ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+    #e5e7eb 25%,
+    #f3f4f6 50%,
+    #e5e7eb 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 6px;
+}
+
+/* ── Skeleton card ─────────────────────────────────────── */
+.sk-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.sk-img {
+  height: 200px;
+  border-radius: 0;
+}
+
+.sk-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sk-badge {
+  width: 70px;
+  height: 20px;
+  border-radius: 20px;
+}
+
+.sk-line {
+  height: 16px;
+}
+
+.sk-btn {
+  height: 36px;
+  margin-top: 4px;
+  border-radius: 8px;
+}
+
+/* ── Grid layout (matches ProductGrid) ─────────────────── */
+.sk-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.sk-status {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
